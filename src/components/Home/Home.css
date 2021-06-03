@@ -1,0 +1,49 @@
+@media all and (min-width: 480px) {
+  .delegateForm {
+    padding: 60px 0;
+  }
+
+  .delegateForm form {
+    margin: 0 auto;
+  }
+  .delegateFormContainer {
+    border: 1px solid #e6e6e6;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  .totalTokenAmountContainer {
+    text-align: center;
+    border: 1px solid #e6e6e6;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  .tokenHeading {
+    font-weight: bold;
+    /* background-color: #f8f9fa !important; */
+  }
+  .incomeSummary {
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+  }
+  .stakedSymbol {
+    display: block;
+    width: 20px;
+    border-top: 5px solid #013a60;
+    position: absolute;
+    top: 10px;
+    margin-right: 10px;
+    font-weight: 500;
+  }
+  .liquidSymbol {
+    /* display: block;
+    width: 20px;
+    border-top: 5px solid #333;
+    position: absolute;
+    top: 10px;
+    margin-right: 10px; */
+    font-weight: 500;
+  }
+  .stakedValue {
+    font-size: 15px;
+  }
+}
