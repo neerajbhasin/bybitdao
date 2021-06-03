@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+
 function WalletButton({ provider, loadWeb3Modal, logoutOfWeb3Modal }) {
   return (
     <Button

@@ -1,30 +1,46 @@
-import React from "react";
-import { Container, Row, Col, Form, Button, Accordion } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { onError } from "../../hooks/errorLib";
 import { useFormFields } from "../../hooks/hooksLib";
 
 import "./Home.css";
 
-function Home({ web3, contracts, accounts }) {
-  const gas = web3.utils.toHex(300000);
-
+function Home({ provider, contracts }) {
+  const [loading, setLoading] = useState(false);
+  const [txHash, setTxhash] = useState("");
+  const [accounts, setAccounts] = useState(undefined);
+  const [balance, setBalance] = useState(undefined);
   const [fields, handleFieldChange] = useFormFields({
     delegateAddress: "",
   });
 
+  useEffect(() => {
+    const balance = async () => {
+      const accounts = await provider.eth.getAccounts();
+      const balance = await contracts.methods.balanceOf(accounts[0]);
+      setAccounts(accounts[0]);
+      setBalance(balance);
+    };
+    // balance();
+  }, []);
   const delegateUser = async (address) => {
+    const accounts = await provider.eth.getAccounts();
+    console.log(accounts);
     const result = await contracts.methods
       .delegate(address)
-      .send({ from: accounts[0], gas: gas });
-
+      .send({ from: accounts[0], gas: 300000 });
     return result;
   };
+
   async function handleSubmit(event) {
     event.preventDefault();
     console.log(fields.delegateAddress);
-
+    setLoading(true);
     const receipt = await delegateUser(fields.delegateAddress);
-    console.log(receipt);
+    if (receipt.transactionHash) {
+      setLoading(false);
+      setTxhash(receipt.transactionHash);
+    }
   }
   return (
     <div className="delegateForm">
@@ -60,13 +76,14 @@ function Home({ web3, contracts, accounts }) {
                 Submit
               </Button>
             </Form>
+            {loading ? "In progress...." : txHash}
           </Col>
           <Col md={3}>
             <Col className="totalTokenAmountContainer" bg="light">
               <Row>
                 <Col>
                   <span className="stakedSymbol"></span>
-                  <span className="">TBD</span>
+                  <span className="">{balance}</span>
                   <p className="stakedValue">985,125</p>
                 </Col>
                 <Col>

@@ -27,15 +27,13 @@ const getWeb3 = () => {
 };
 
 const getContracts = async (web3) => {
-  const networkId = await web3.eth.net.getId();
-
-  const deployedNetwork = COMPABI.networks[networkId];
-  const comp = new web3.eth.Contract(
-    COMPABI.abi,
-    "0x0E51Ac179A2f148a7F1a8Ac62882258aE40B85d8"
-  );
-
-  return comp;
+  // // const networkId = await web3.eth.net.getId();
+  // const deployedNetwork = COMPABI.networks[networkId];
+  // const comp = new web3.eth.Contract(
+  //   COMPABI.abi,
+  //   "0x0E51Ac179A2f148a7F1a8Ac62882258aE40B85d8"
+  // );
+  // return comp;
 };
 
 export { getWeb3, getContracts };
