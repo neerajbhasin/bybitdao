@@ -8,21 +8,20 @@ import "./Home.css";
 function Home({ provider, contracts }) {
   const [loading, setLoading] = useState(false);
   const [txHash, setTxhash] = useState("");
-  const [accounts, setAccounts] = useState(undefined);
+
   const [balance, setBalance] = useState(undefined);
   const [fields, handleFieldChange] = useFormFields({
     delegateAddress: "",
   });
 
-  useEffect(() => {
-    const balance = async () => {
-      const accounts = await provider.eth.getAccounts();
-      const balance = await contracts.methods.balanceOf(accounts[0]);
-      setAccounts(accounts[0]);
-      setBalance(balance);
-    };
-    // balance();
-  }, []);
+  // useEffect(() => {
+  //   const balance = async () => {
+  //     const balance = await contracts.methods.balanceOf(accounts);
+
+  //     setBalance(balance);
+  //   };
+  //   // balance();
+  // }, []);
   const delegateUser = async (address) => {
     const accounts = await provider.eth.getAccounts();
     console.log(accounts);
@@ -78,7 +77,7 @@ function Home({ provider, contracts }) {
             </Form>
             {loading ? "In progress...." : txHash}
           </Col>
-          <Col md={3}>
+          {/* <Col md={3}>
             <Col className="totalTokenAmountContainer" bg="light">
               <Row>
                 <Col>
@@ -92,8 +91,8 @@ function Home({ provider, contracts }) {
                   <p className="stakedValue">985,125</p>
                 </Col>
               </Row>
-            </Col>
-          </Col>
+            </Col> 
+            </Col>*/}
         </Row>
       </Container>
     </div>

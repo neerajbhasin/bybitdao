@@ -14,6 +14,7 @@ function useWeb3Modal(config = {}) {
   const [provider, setProvider] = useState();
   const [autoLoaded, setAutoLoaded] = useState(false);
   const [contracts, setContracts] = useState(undefined);
+  const [accounts, setAccounts] = useState(undefined);
   const {
     autoLoad = true,
     infuraId = INFURA_ID,
@@ -41,7 +42,8 @@ function useWeb3Modal(config = {}) {
     console.log(newProvider);
     const web3 = new Web3(newProvider);
     const contracts = await getContracts(web3);
-
+    // const accounts = await web3.eth.getAccounts();
+    // setAccounts(accounts[0]);
     setProvider(web3);
     setContracts(contracts);
   }, [web3Modal]);
